@@ -1,5 +1,4 @@
 window.onload = function() {
-
     var player,
         cursors,
         game = new Phaser.Game(
