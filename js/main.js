@@ -21,35 +21,26 @@ window.onload = function() {
 
     function create() {
         player = game.add.sprite(game.world.centerX - 52, game.world.centerY - 75, 'walk');
-        player.animations.add('left', [13], 1, false);
-        player.animations.add('right', [12], 1, false);
-        player.animations.add('rightwalk', [0,1,2,3,4,5], 6, true);
-        player.animations.add('leftwalk', [6,7,8,9,10,11], 6, true);
-
-        player.isLeft = true;
+        player.animations.add('idle', [13], 1, false);
+        player.animations.add('walk', [6,7,8,9,10,11], 6, true);
+        player.anchor.setTo(.5,.5);
 
         player.move = function(movement) {
+            this.animations.play('walk');
             player.x += movement;
         };
         player.moveLeft = function() {
-            this.animations.play('leftwalk');
-            this.isLeft = true;
+            this.scale.x = 1;
             this.move(-3);
         };
         player.moveRight = function() {
-            this.animations.play('rightwalk');
-            this.isLeft = false;
+            this.scale.x = -1;
             this.move(3);
         };
         player.idle = function() {
-            if(this.isLeft == true) {
-                this.animations.play('left', true);
-            } else {
-                this.animations.play('right', true);
-            }
+            this.animations.play('idle', true);
         };
-
-
+        
         cursors = game.input.keyboard.createCursorKeys();
     }
 
